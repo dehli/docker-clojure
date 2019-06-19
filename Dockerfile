@@ -28,3 +28,6 @@ RUN ./$CLJ_VERSION
 
 RUN apt-get install -y --no-install-recommends rlwrap
 RUN clj -e '(System/exit 0)'
+
+# Inststall latest npm
+RUN npm install npm -g
