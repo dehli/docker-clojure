@@ -8,9 +8,10 @@ RUN apt-get install -y --no-install-recommends \
     curl \
     git \
     gzip \
+    jq \
     nodejs \
     npm \
-    openjdk-8-jdk \
+    openjdk-11-jdk \
     python-pip \
     python-setuptools \
     ssh \
@@ -19,16 +20,11 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install -U pip
 RUN pip install awscli
 
-# Install Boot
-ENV BOOT_AS_ROOT yes
-ENV BOOT_VERSION 2.7.2
-RUN bash -c "cd /usr/local/bin && curl -fsSLo boot https://github.com/boot-clj/boot-bin/releases/download/latest/boot.sh && chmod 755 boot"
-RUN boot repl -e '(System/exit 0)'
-
-# Install clojure
-RUN curl -O https://download.clojure.org/install/linux-install-1.9.0.348.sh
-RUN chmod +x linux-install-1.9.0.348.sh
-RUN ./linux-install-1.9.0.348.sh
+# Install Clojure
+ARG CLJ_VERSION="linux-install-1.10.1.447.sh"
+RUN curl -O https://download.clojure.org/install/$CLJ_VERSION
+RUN chmod +x $CLJ_VERSION
+RUN ./$CLJ_VERSION
 
 RUN apt-get install -y --no-install-recommends rlwrap
 RUN clj -e '(System/exit 0)'
