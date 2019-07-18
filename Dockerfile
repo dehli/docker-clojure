@@ -7,6 +7,7 @@ RUN apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
+    gnupg \
     gzip \
     jq \
     nodejs \
@@ -16,6 +17,12 @@ RUN apt-get install -y --no-install-recommends \
     python-setuptools \
     ssh \
     tar
+
+# Setup yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update
+RUN apt-get install -y yarn
 
 RUN pip install -U pip
 RUN pip install awscli

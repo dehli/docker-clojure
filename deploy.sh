@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker build -t dehli/clojure .
+docker build -t dehli/clojure . --no-cache
 docker push dehli/clojure
