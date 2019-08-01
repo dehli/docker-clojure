@@ -28,7 +28,7 @@ RUN pip install -U pip
 RUN pip install awscli
 
 # Install Clojure
-ARG CLJ_VERSION="linux-install-1.10.1.447.sh"
+ARG CLJ_VERSION="linux-install-1.10.1.466.sh"
 RUN curl -O https://download.clojure.org/install/$CLJ_VERSION
 RUN chmod +x $CLJ_VERSION
 RUN ./$CLJ_VERSION
